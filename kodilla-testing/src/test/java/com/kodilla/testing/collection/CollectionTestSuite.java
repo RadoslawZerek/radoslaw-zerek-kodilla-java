@@ -17,50 +17,54 @@ public class CollectionTestSuite {
         System.out.println("Test Case: end");
     }
 
-    @DisplayName("Checks if the class behaves correctly when it is empty")
+    @DisplayName("When given an empty list, new empty list should be returned")
 
     @Test
     void testOddNumbersExterminatorEmptyList() {
 
-            //Given
-            List<Integer> someNumbers = new ArrayList<>(Arrays.asList(46, 78, 113, 258, 13));
+        OddNumbersExterminator exterminator = new OddNumbersExterminator();
 
-            //When
-            someNumbers.removeAll(someNumbers);
-            boolean expectResult = someNumbers.isEmpty();
+        //Given
+        List<Integer> emptyLists = new ArrayList<>();
 
-            if (expectResult == true) {
-                System.out.println("Test OK");
-            } else {
-                System.out.println("Test was aborted");
-            }
-            //Then
-            Assertions.assertTrue(expectResult);
+        //When
+        List<Integer> result = exterminator.exterminate(emptyLists);
+        if(result.isEmpty()) {
+            System.out.println("Test Ok");
+        } else {
+            System.out.println("Test was aborted");
         }
-        @DisplayName("Checks if the class behaves correctly when it contains even and odd numbers")
 
+        //Then
+        Assertions.assertEquals(emptyLists, result);
+        }
+
+        @DisplayName("When given a normal list, only even numbers should be returned")
         @Test
-        void testOddNumbersExterminatorNormalList () {
+        void testOddNumbersExterminatorNormalList() {
 
-            //Given
-            List<Integer> emptyList = new ArrayList<>(Arrays.asList());
-            boolean result = emptyList.isEmpty();
-            System.out.println("List is empty " + result);
+            // Given
+            OddNumbersExterminator exterminator = new OddNumbersExterminator();
+            ArrayList<Integer> input = new ArrayList<>();
+            input.add(1);
+            input.add(2);
+            input.add(3);
+            input.add(4);
+            input.add(5);
+            input.add(6);
 
-            //When
+            ArrayList<Integer> expected = new ArrayList<>();
+            expected.add(2);
+            expected.add(4);
+            expected.add(6);
 
-            List<Integer> anotherNumbers = new ArrayList<>(Arrays.asList(46, 78, 113, 258, 13));
 
-            boolean expectedResult = anotherNumbers.isEmpty();
+            // When
+            List<Integer> output = exterminator.exterminate(input);
+            System.out.println("Testing " + expected);
 
-            if (expectedResult == false) {
-                System.out.println("Test OK" + " List size: " + anotherNumbers.size());
-            } else {
-                System.out.println("Test was aborted");
-            }
-            //Then
-            Assertions.assertFalse(expectedResult);
-
+            // Then
+            Assertions.assertEquals(expected, output);
         }
     }
 
