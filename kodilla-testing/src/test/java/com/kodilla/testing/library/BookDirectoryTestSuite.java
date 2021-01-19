@@ -1,5 +1,6 @@
 package com.kodilla.testing.library;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -25,6 +26,7 @@ public class BookDirectoryTestSuite {
     @Mock
     private LibraryDatabase libraryDatabaseMock;
 
+    @DisplayName("Checks if the list of books meeting the search condition is correctly returned.")
     @Test
     void testListBooksWithConditionsReturnList() {
         //Given
@@ -87,5 +89,46 @@ public class BookDirectoryTestSuite {
         assertEquals(0, theListOfBooks10.size());
         verify(libraryDatabaseMock, times(0))
                 .listBooksWithCondition(anyString());
+    }
+    @Test
+    void testListBooksInHandsIfEmpty() {
+        //Given
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOf0Books = new ArrayList<>();
+        LibraryUser libraryUser = new LibraryUser("John","Doe","260260260");
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOf0Books);
+
+        //When
+        List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
+
+        //Then
+        assertEquals(0,theListOfBooks.size());
+    }
+
+    @Test
+    void testListBooksInHandsIf1Book() {
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOf1Books = generateListOfNBooks(1);
+        LibraryUser libraryUser = new LibraryUser("John","Doe","260260260");
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOf1Books);
+
+        List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
+
+        assertEquals(1,theListOfBooks.size());
+    }
+
+    @Test
+    void testListBooksInHandsIf5Books() {
+        //Given
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOf5Books = generateListOfNBooks(5);
+        LibraryUser libraryUser = new LibraryUser("John","Doe","260260260");
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOf5Books);
+
+        //When
+        List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
+
+        //Then
+        assertEquals(5,theListOfBooks.size());
     }
 }
