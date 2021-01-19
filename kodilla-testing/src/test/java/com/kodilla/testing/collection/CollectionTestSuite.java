@@ -2,7 +2,6 @@ package com.kodilla.testing.collection;
 
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CollectionTestSuite {
@@ -22,49 +21,43 @@ public class CollectionTestSuite {
     @Test
     void testOddNumbersExterminatorEmptyList() {
 
-        OddNumbersExterminator exterminator = new OddNumbersExterminator();
-
         //Given
+        OddNumbersExterminator exterminator = new OddNumbersExterminator();
         List<Integer> emptyLists = new ArrayList<>();
 
         //When
         List<Integer> result = exterminator.exterminate(emptyLists);
-        if(result.isEmpty()) {
-            System.out.println("Test Ok");
-        } else {
-            System.out.println("Test was aborted");
-        }
 
         //Then
         Assertions.assertEquals(emptyLists, result);
+    }
+
+    @DisplayName("When given a normal list, only even numbers should be returned")
+    @Test
+    void testOddNumbersExterminatorNormalList() {
+
+        // Given
+        OddNumbersExterminator exterminator = new OddNumbersExterminator();
+        ArrayList<Integer> input = new ArrayList<>();
+        input.add(1);
+        input.add(2);
+        input.add(3);
+        input.add(4);
+        input.add(5);
+        input.add(6);
+
+        // When
+        for (Integer expectedNumbersList : exterminator.exterminate(input)) {
+            System.out.println(expectedNumbersList);
         }
-
-        @DisplayName("When given a normal list, only even numbers should be returned")
-        @Test
-        void testOddNumbersExterminatorNormalList() {
-
-            // Given
-            OddNumbersExterminator exterminator = new OddNumbersExterminator();
-            ArrayList<Integer> input = new ArrayList<>();
-            input.add(1);
-            input.add(2);
-            input.add(3);
-            input.add(4);
-            input.add(5);
-            input.add(6);
-
-            ArrayList<Integer> expected = new ArrayList<>();
-            expected.add(2);
-            expected.add(4);
-            expected.add(6);
-
-
-            // When
-            List<Integer> output = exterminator.exterminate(input);
-            System.out.println("Testing " + expected);
-
-            // Then
-            Assertions.assertEquals(expected, output);
+        // Then
+        Assertions.assertTrue(input.size() != 0);
+        for (Integer evenNumberList : exterminator.exterminate(input)) {
+            Assertions.assertTrue(evenNumberList % 2 == 0);
+        }
+        for (Integer evenNumberList : exterminator.exterminate(input)) {
+            Assertions.assertFalse(evenNumberList % 2 != 0);
         }
     }
+}
 
