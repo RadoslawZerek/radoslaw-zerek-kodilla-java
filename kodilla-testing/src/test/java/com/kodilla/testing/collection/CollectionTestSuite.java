@@ -52,12 +52,6 @@ public class CollectionTestSuite {
         }
         // Then
         Assertions.assertTrue(input.size() != 0);
-        for (Integer evenNumberList : exterminator.exterminate(input)) {
-            Assertions.assertTrue(evenNumberList % 2 == 0);
-        }
-        for (Integer evenNumberList : exterminator.exterminate(input)) {
-            Assertions.assertFalse(evenNumberList % 2 != 0);
-        }
     }
 }
 
