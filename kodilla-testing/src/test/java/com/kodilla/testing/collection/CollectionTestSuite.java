@@ -2,6 +2,7 @@ package com.kodilla.testing.collection;
 
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CollectionTestSuite {
@@ -36,22 +37,19 @@ public class CollectionTestSuite {
     @Test
     void testOddNumbersExterminatorNormalList() {
 
-        // Given
+        //Given
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
-        ArrayList<Integer> input = new ArrayList<>();
-        input.add(1);
-        input.add(2);
-        input.add(3);
-        input.add(4);
-        input.add(5);
-        input.add(6);
+        //Integer testIntegers[] = new Integer[] {2,3,5,6,7,9};
+        List<Integer> input = Arrays.asList(2, 3, 5, 6, 7, 9);
+        //Integer expectedIntegers[] = new Integer[] {2,6};
+        List<Integer> expectedList = Arrays.asList(2, 6);
 
-        // When
-        for (Integer expectedNumbersList : exterminator.exterminate(input)) {
-            System.out.println(expectedNumbersList);
-        }
-        // Then
-        Assertions.assertTrue(input.size() != 0);
+        //When
+        //System.out.println("Testing filled list");
+        List<Integer> output = exterminator.exterminate(input);
+
+        //Then
+        Assertions.assertEquals(expectedList, output);
     }
 }
 
