@@ -39,13 +39,10 @@ public class CollectionTestSuite {
 
         //Given
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
-        //Integer testIntegers[] = new Integer[] {2,3,5,6,7,9};
         List<Integer> input = Arrays.asList(2, 3, 5, 6, 7, 9);
-        //Integer expectedIntegers[] = new Integer[] {2,6};
         List<Integer> expectedList = Arrays.asList(2, 6);
 
         //When
-        //System.out.println("Testing filled list");
         List<Integer> output = exterminator.exterminate(input);
 
         //Then
