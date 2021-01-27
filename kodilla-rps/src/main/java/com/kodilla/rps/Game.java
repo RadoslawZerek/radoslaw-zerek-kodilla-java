@@ -40,29 +40,29 @@ public class Game {
         while (!end) {
             printStartMenu();
             char key = choice.getChoiceChar();
-            switch(key) {
-                case '1' :
+            switch (key) {
+                case '1':
                     setTotalRounds();
                     restart();
                     startGame(GameType.DEFAULT);
                     break;
-                case '2' :
+                case '2':
                     setTotalRounds();
                     restart();
                     startGame(GameType.ENHANCED);
                     break;
-                case '3' :
-                    if (gameType!=null) {
+                case '3':
+                    if (gameType != null) {
                         restart();
                         startGame(gameType);
                     }
                     break;
                 case '4':
-                    if (gameType!=null && endGame) startGame(gameType);
-                case 'r' :
+                    if (gameType != null && endGame) startGame(gameType);
+                case 'r':
                     printRules();
                     break;
-                case 'x' :
+                case 'x':
                     end = true;
                     break;
             }
@@ -156,7 +156,7 @@ public class Game {
     }
 
     private void printGameBar() {
-        System.out.println(name+' '+roundsWon+':'+roundsLost+" Bot   |   Round: "+currentRound+'/'+totalRounds);
+        System.out.println(name + ' ' + roundsWon + ':' + roundsLost + " Bot   |   Round: " + currentRound + '/' + totalRounds);
     }
 
     private void printGameMenu() {
@@ -170,18 +170,18 @@ public class Game {
     }
 
     private void move(String username, BaseMoves baseMoves) {
-        System.out.println(username + " -> " +baseMoves.getName());
+        System.out.println(username + " -> " + baseMoves.getName());
     }
 
     private void playerMove(BaseMoves baseMove) {
         player = baseMove;
-        move(name,baseMove);
+        move(name, baseMove);
     }
 
     private List<BaseMoves> setPossibleMoves() {
         List<BaseMoves> possibleMoves = new ArrayList<>();
         BaseMoves[] moves = new BaseMoves[]{new Rock(), new Paper(), new Scissors()};
-        IntStream.iterate(0,n -> n++)
+        IntStream.iterate(0, n -> n++)
                 .limit(moves.length)
                 .forEach(m -> possibleMoves.add(moves[m]));
         return possibleMoves;
@@ -193,15 +193,16 @@ public class Game {
         BaseMoves bot;
         //Win for player
         switch (gameType) {
-            case DEFAULT -> {
+            case DEFAULT: {
                 bot = computerMoves.get(r.nextInt(3));
                 move("Bot", bot);
-                if (player.getWinsWith().contains(bot)) roundState = RoundState.WON;
-                else if (player.getLosesAgainst().contains(bot)) roundState = RoundState.LOST;
-                else roundState = RoundState.DRAW;
+                if (player.getWinsWith().contains(bot)) {
+                    roundState = RoundState.WON;
+                } else if (player.getLosesAgainst().contains(bot)) {
+                    roundState = RoundState.LOST;
+                } else roundState = RoundState.DRAW;
             }
-
-            case ENHANCED -> {
+            case ENHANCED: {
                 int percent = r.nextInt(100);
                 int index = r.nextInt(2);
                 if (percent < 25) {
@@ -231,9 +232,9 @@ public class Game {
 
     private void determineWinner(RoundState rs) {
         switch (rs) {
-            case LOST -> lostRound();
-            case DRAW -> drawRound();
-            case WON -> wonRound();
+            case LOST: lostRound();
+            case DRAW: drawRound();
+            case WON: wonRound();
         }
     }
 
@@ -242,10 +243,10 @@ public class Game {
         roundsWon++;
         if (winStreak == 3) {
             roundsWon++;
-            winStreak=0;
-            System.out.println(name+" is on fire! 1 more point was awarded");
+            winStreak = 0;
+            System.out.println(name + " is on fire! 1 more point was awarded");
         }
-        System.out.println(name+" wins this round");
+        System.out.println(name + " wins this round");
     }
 
     private void drawRound() {
@@ -253,7 +254,7 @@ public class Game {
     }
 
     private void lostRound() {
-        if (winStreak>0) winStreak--;
+        if (winStreak > 0) winStreak--;
         roundsLost++;
         System.out.println("Bot wins this round");
     }
