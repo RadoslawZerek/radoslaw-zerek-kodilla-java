@@ -3,4 +3,6 @@ include 'kodilla-testing'
 include 'kodilla-stream'
 include 'kodilla-rps'
 include 'kodilla-exception'
+include 'black-jack'
+include 'kodilla-good-patterns'
 
