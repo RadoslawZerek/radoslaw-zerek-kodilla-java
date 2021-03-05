@@ -1,8 +1,8 @@
 package com.kodilla.good.patterns.challenges.order;
 
 public class OrderDTO {
-    public User user;
-    public boolean isOrdered;
+    private User user;
+    private boolean isOrdered;
 
     public OrderDTO(User user, boolean isOrdered) {
         this.user = user;
