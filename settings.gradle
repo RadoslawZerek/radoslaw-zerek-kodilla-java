@@ -6,4 +6,4 @@ include 'kodilla-exception'
 include 'black-jack'
 include 'kodilla-good-patterns'
 include 'kodilla-spring-intro'
-
+include 'kodilla-spring'
